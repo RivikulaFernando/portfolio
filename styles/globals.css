@@ -1,9 +1,14 @@
 @import "tailwindcss";
 
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #3a86ff;       /* Bright blue */
+  --primary-dark: #2563eb;  /* Darker blue */
+  --accent: #00f5d4;        /* Teal accent */
+  --navbar-bg: rgba(10, 10, 15, 0.85); /* Semi-transparent dark background */
+  --navbar-text: #ffffff;
+  --navbar-hover: #00f5d4;  /* Teal hover state */
 }
 
 :root {
@@ -25,7 +30,53 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-/* Add these to your global CSS */
+
+/* Add modern navbar styling */
+.navbar {
+  background: var(--navbar-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.navbar-link {
+  color: var(--navbar-text);
+  position: relative;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.navbar-link:hover {
+  color: var(--navbar-hover);
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--navbar-hover);
+  transition: width 0.3s ease;
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.025em;
+  background: linear-gradient(90deg, #ffffff, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Existing styles */
 #tsparticles {
   position: fixed !important;
   z-index: -1;

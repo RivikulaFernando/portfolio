@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParticleContext } from './context';
 
 interface SectionObserverProps {
@@ -8,7 +8,7 @@ interface SectionObserverProps {
 
 const SectionObserver: React.FC<SectionObserverProps> = ({ sectionId, shouldInvert }) => {
   const { setInvertParticles } = useParticleContext();
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
   
   useEffect(() => {
     const targetSection = document.getElementById(sectionId);
@@ -16,38 +16,18 @@ const SectionObserver: React.FC<SectionObserverProps> = ({ sectionId, shouldInve
     
     const observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
-      
-      if (entry.isIntersecting && shouldInvert) {
-        // Start transition
-        setIsTransitioning(true);
-        
-        // Apply transition with a small delay to make it smoother
-        setTimeout(() => {
-          setInvertParticles(true);
-        }, 50);
-      } else if (!entry.isIntersecting && shouldInvert) {
-        // Start exit transition
-        setIsTransitioning(true);
-        
-        // Apply transition with a small delay
-        setTimeout(() => {
-          setInvertParticles(false);
-        }, 50);
-      }
-      
-      // Reset transitioning state after animation completes
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 1100); // Slightly longer than transition duration
+      setInvertParticles(entry.isIntersecting && shouldInvert);
     }, {
       threshold: 0.3,
-      rootMargin: '-50px 0px', // Trigger a bit earlier for smoother experience
     });
     
+    observerRef.current = observer;
     observer.observe(targetSection);
     
     return () => {
-      observer.disconnect();
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
     };
   }, [sectionId, shouldInvert, setInvertParticles]);
   

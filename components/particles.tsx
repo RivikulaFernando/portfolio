@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import type { Engine } from "tsparticles-engine";
@@ -19,7 +19,7 @@ const ParticlesBackground: React.FC = () => {
         options={{
           background: {
             color: {
-              value: "transparent", // Keep transparent to let the parent div control background color
+              value: "transparent",
             },
           },
           fpsLimit: 60,
@@ -109,7 +109,7 @@ const ParticlesBackground: React.FC = () => {
         }}
         className="transition-opacity duration-1000 ease-in-out"
         style={{ 
-          opacity: isTransitioning ? 0.6 : 1 // Slightly fade during transitions for smoother effect
+          opacity: isTransitioning ? 0.6 : 1
         }}
       />
     </div>

@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 
 // Custom hook for smooth transitions
-export function useSmoothTransition(value: boolean, duration = 1000): boolean {
+export function useSmoothTransition(value: boolean): boolean {
   const [transitioning, setTransitioning] = useState(value);
   
   useEffect(() => {
-    // Start transition
     const timeout = setTimeout(() => {
       setTransitioning(value);
-    }, 50); // Small delay to ensure CSS transitions have time to apply
+    }, 50);
     
     return () => clearTimeout(timeout);
   }, [value]);

@@ -35,28 +35,64 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className="flex justify-between items-center w-full">
+    <nav className="navbar flex justify-between items-center w-full py-4 px-6">
       <div className="flex items-center">
-        <Link href="/" className="text-xl font-bold">
+        <Link href="/" className="navbar-brand">
           Rivikula
         </Link>
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden md:flex space-x-8">
+      <div className="hidden md:flex space-x-6">
         {navLinks.map((link) => (
           <a
             key={link.id}
             href={`#${link.id}`}
             onClick={(e) => scrollToSection(e, link.id)}
-            className="hover:text-blue-400 transition-colors cursor-pointer"
+            className="navbar-link"
           >
             {link.label}
           </a>
         ))}
       </div>
 
-      {/* Rest of your navbar component... */}
+      {/* Mobile Navigation Button */}
+      <div className="md:hidden">
+        <button 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? (
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="absolute top-16 left-0 right-0 md:hidden navbar py-3 z-50 flex flex-col space-y-3">
+          {navLinks.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              className="navbar-link mx-4 py-2"
+              onClick={(e) => {
+                scrollToSection(e, link.id);
+                setIsMenuOpen(false);
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };

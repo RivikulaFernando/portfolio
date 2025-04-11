@@ -29,9 +29,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <SectionObserver sectionId="skills" shouldInvert={true} />
       
       {/* Content */}
-      <header className="bg-gray-800 text-white p-4 relative z-10 sticky top-0">
-        <Navbar />
-      </header>
+      <header className="sticky top-0 z-20">
+  <Navbar />
+</header>
 
       <main className="flex-grow p-8">{children}</main>
       
