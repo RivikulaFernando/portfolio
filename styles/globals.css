@@ -82,7 +82,8 @@ a:hover {
   font-size: 1.25rem;
   letter-spacing: 0.025em;
   background: linear-gradient(90deg, #ffffff, var(--accent));
-  
+  background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
