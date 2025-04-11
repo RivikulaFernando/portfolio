@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #111827; /* Darker background */
+  --foreground: #f3f4f6; /* Light text */
   --primary: #3a86ff;       /* Bright blue */
   --primary-dark: #2563eb;  /* Darker blue */
   --accent: #00f5d4;        /* Teal accent */
@@ -31,6 +31,16 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Fix for link colors */
+a {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
 /* Add modern navbar styling */
 .navbar {
   background: var(--navbar-bg);
@@ -40,7 +50,7 @@ body {
 }
 
 .navbar-link {
-  color: var(--navbar-text);
+  color: var(--navbar-text) !important;
   position: relative;
   font-weight: 500;
   transition: color 0.3s ease;
@@ -49,7 +59,7 @@ body {
 }
 
 .navbar-link:hover {
-  color: var(--navbar-hover);
+  color: var(--navbar-hover) !important;
 }
 
 .navbar-link::after {
@@ -72,12 +82,20 @@ body {
   font-size: 1.25rem;
   letter-spacing: 0.025em;
   background: linear-gradient(90deg, #ffffff, var(--accent));
-  -webkit-background-clip: text;
-  background-clip: text;
+  
   -webkit-text-fill-color: transparent;
 }
 
-/* Existing styles */
+/* Override text color in inverted sections */
+.bg-white a:not(.navbar-link) {
+  color: #111827 !important; /* Dark text color for links in white sections */
+}
+
+.text-white {
+  color: white !important; /* Force white text where specified */
+}
+
+/* Fix for particles */
 #tsparticles {
   position: fixed !important;
   z-index: -1;
@@ -88,17 +106,7 @@ body {
   pointer-events: none;
 }
 
-section {
-  position: relative;
-  z-index: 1;
-}
-
-/* Transition for smoother color changes */
-.bg-opacity-90 {
-  transition: background-color 0.5s ease;
-}
-
-/* Smooth transition utilities */
+/* Transition helpers */
 .transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -115,19 +123,4 @@ section {
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 1000ms;
-}
-
-/* Ensure particles can be seen through overlays */
-#tsparticles canvas {
-  transition: filter 1s ease-in-out;
-}
-
-/* Scroll behavior for smoother navigation */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Section transition helper */
-section {
-  transition: background-color 1000ms ease-in-out;
 }
