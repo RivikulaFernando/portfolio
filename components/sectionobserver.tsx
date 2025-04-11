@@ -8,6 +8,7 @@ interface SectionObserverProps {
 
 const SectionObserver: React.FC<SectionObserverProps> = ({ sectionId, shouldInvert }) => {
   const { setInvertParticles } = useParticleContext();
+  // We're using observerRef below, so no need for the ESLint disable
   const observerRef = useRef<IntersectionObserver | null>(null);
   
   useEffect(() => {
@@ -21,6 +22,7 @@ const SectionObserver: React.FC<SectionObserverProps> = ({ sectionId, shouldInve
       threshold: 0.3,
     });
     
+    // Store the observer in the ref so we can clean it up later
     observerRef.current = observer;
     observer.observe(targetSection);
     

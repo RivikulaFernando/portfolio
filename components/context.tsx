@@ -16,7 +16,7 @@ export const ParticleProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [invertParticlesState, setInvertParticlesState] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   
-  // Enhanced setter with transition state
+  // Make sure this function body is completed (it had {...} in your code)
   const setInvertParticles = useCallback((invert: boolean) => {
     setIsTransitioning(true);
     setInvertParticlesState(invert);

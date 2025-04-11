@@ -1,6 +1,8 @@
 import React from 'react';
 import Layout from '../components/layout';
 import Image from 'next/image';
+// If you're importing icons but not using them, either remove the imports or add ESLint disable
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FaFacebook, FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa';
 
 export default function About() {
