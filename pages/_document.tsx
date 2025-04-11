@@ -1,11 +1,10 @@
+
 import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
     <Html>
-      <Head>
-        <title>My Portfolio</title>
-      </Head>
+      <Head />
       <body>
         <Main />
         <NextScript />
